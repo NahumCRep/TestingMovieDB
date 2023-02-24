@@ -1,0 +1,34 @@
+.card-container {
+    height: 300px;
+}
+
+.card-container > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.card-container figure {
+    width: 100%;
+    height: 90%;
+}
+
+.card-container figure > img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.card-body {
+    width: 100%;
+    color: #282c34;
+    font-size: 0.6rem;
+    font-weight: lighter;
+}
+
+.card-body h2 {
+    text-align: center;
+  
+}
+
