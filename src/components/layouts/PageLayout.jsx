@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/pagelayout.css'
+import '../../styles/components/pagelayout.css'
 import { Navbar } from '../ui'
 
 export const PageLayout = ({children}) => {

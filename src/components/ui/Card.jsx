@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { posterURL500 } from '../../api/config'
-import '../../styles/card.css'
+import defaultImage from '../../assets/images/default.webp'
+import '../../styles/components/card.css'
 
 export const Card = ({ movie }) => {
     return (
@@ -9,7 +10,11 @@ export const Card = ({ movie }) => {
             <Link to={`/details/${movie.id}`}>
                 <figure>
                     <img
-                        src={`${posterURL500}/${movie.poster_path}`}
+                        src={
+                            movie.poster_path 
+                            ? `${posterURL500}/${movie.poster_path}`
+                            : defaultImage
+                        }
                         alt={`${movie.title}`} />
                 </figure>
                 <div className='card-body'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useMovie } from '../../hooks'
-import '../../styles/pagination.css'
+import '../../styles/components/pagination.css'
 
 export const Pagination = () => {
     const { page, totalPages } = useMovie()

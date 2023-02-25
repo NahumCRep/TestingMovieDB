@@ -3,8 +3,7 @@ export const MoviesReducer = (state, action) => {
         case 'addFavMovie':
             return [...state, action.payload]
         case 'deleteFavMovie':
-            const list = state.filter(movie => movie.id != action.payload)
-            return list
+            return state.filter(movie => movie != action.payload)
         default:
             return state
     }

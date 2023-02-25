@@ -1,15 +1,19 @@
 import React,  {useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import '../../styles/navbar.css'
+import '../../styles/components/navbar.css'
 
 export const Navbar = () => {
   const [search, setSearch] = useState('')
+  const [isNavOpen, setIsNavOpen] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     navigate(`/search/${search}`)
-    // console.log(searchRef.current.value)
+  }
+
+  const handleMenu = () => {
+    setIsNavOpen(!isNavOpen)
   }
 
   return (
@@ -17,7 +21,7 @@ export const Navbar = () => {
         <NavLink to={'/'} className='nav-logo'>
           MovieApp
         </NavLink>
-        <ul className='nav-links'>
+        <ul className={`nav-links ${isNavOpen ? 'nav-open':''}`}>
           <form method='GET' onSubmit={handleSubmit}>
             <input 
               type="text" 
@@ -27,10 +31,16 @@ export const Navbar = () => {
             />
             <button type='submit'>buscar</button>
           </form>
-          <NavLink>
+          <NavLink to={'/favorites'}>
             Mis Favoritos
           </NavLink>
         </ul>
+
+        <button 
+          onClick={handleMenu} 
+          className='burguer'>
+            M
+        </button>
     </div>
   )
 }

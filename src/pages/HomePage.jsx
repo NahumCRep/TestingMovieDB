@@ -1,17 +1,19 @@
 import { useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation} from 'react-router-dom'
 import { useMovie } from '../hooks'
 import { PageLayout } from '../components/layouts/PageLayout'
 import { Pagination, Card } from '../components/ui'
-import '../styles/homepage.css'
+import '../styles/pages/homepage.css'
 
 export const HomePage = () => {
     const {data, getMovies, getCategories} = useMovie()
-    const {category, search, page} = useParams()
+    const {category, search} = useParams()
     const location = useLocation()
 
+    const queryParams = new URLSearchParams(location.search)
+    const page = queryParams.get('page')
+
     useEffect(() => {
-        console.log(location)
         getMovies({searchValue: search, page: page})
         getCategories()
     }, [search, category, page])
@@ -27,8 +29,7 @@ export const HomePage = () => {
                     ))
                 }
             </section>
-            {/* no terminado */}
-            {/* <Pagination currentPage={page || 1} /> */}
+            <Pagination currentPage={page || 1} />
         </PageLayout>
     )
 }

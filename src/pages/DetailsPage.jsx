@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../styles/detailspage.css'
+import '../styles/pages/detailspage.css'
 import { PageLayout } from '../components/layouts/PageLayout'
 import { useParams } from 'react-router-dom'
 import { useMovie } from '../hooks'

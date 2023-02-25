@@ -1,8 +1,12 @@
 import axios from 'axios'
-import { apiUrl } from './config'
+import { apiUrl, authUrl } from './config'
 
-const MovieApi = axios.create({
+export const MovieApi = axios.create({
   baseURL: apiUrl   
 })
 
-export default MovieApi
+export const AuthApi = axios.create({
+  baseURL: authUrl
+})
+
+// export default MovieApi
