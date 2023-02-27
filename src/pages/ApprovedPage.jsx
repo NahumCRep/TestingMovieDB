@@ -15,10 +15,20 @@ export const ApprovedPage = () => {
   }
 
   useEffect(() => {
-    confirmLogin(token)
+    (async () => {
+      const resp = await confirmLogin(token)
+      if(resp && resp.ok){
+        navigate('/')
+      }
+    })()
+
+    return () => {}
   }, [token])
 
   return (
-    <div>Approved</div>
+    <div className='approved-page'>
+        <h1>Confirmando...</h1>
+        <div className='approved-loader'></div>
+    </div>
   )
 }

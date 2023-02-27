@@ -1,0 +1,56 @@
+.categories-section {
+    width: 100%;
+    padding: 1rem;
+    font-family: $primary-font;
+    border: 4px solid ghostwhite;
+
+    .category-menu-btn {
+        width: 100%;
+        height: 30px;
+        margin-top: 10px;
+
+        @include desktop {
+            display: none;
+        }
+    }
+}
+
+.categories-container {
+    width: 100%;
+    list-style: none;
+    margin-top: 10px;
+    color: $black;
+    height: 0px;
+    overflow: hidden;
+
+    li {
+        height: 35px;
+        
+        a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 5px;
+            text-decoration: none;
+            color: inherit;
+            font-weight: 600;
+        }
+    }
+
+    @include tablet {
+        li:hover {
+            background-color: $beige;
+        }
+    }
+
+    @include desktop {   
+        & {
+            height: auto;
+        }
+    }
+}
+
+.category-menu-open {
+    height: auto;
+}

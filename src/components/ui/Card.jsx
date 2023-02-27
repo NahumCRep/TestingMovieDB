@@ -2,12 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { posterURL500 } from '../../api/config'
 import defaultImage from '../../assets/images/default.webp'
-import '../../styles/components/card.css'
 
-export const Card = ({ movie }) => {
+export const Card = ({ movie, favorite = false }) => {
     return (
         <div className='card-container'>
-            <Link to={`/details/${movie.id}`}>
+            <Link to={favorite ? `/details/${movie.id}?fav=true`:`/details/${movie.id}`}>
                 <figure>
                     <img
                         src={

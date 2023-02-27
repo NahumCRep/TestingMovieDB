@@ -1,27 +1,34 @@
 import React, { useEffect } from 'react'
 import { PageLayout } from '../components/layouts/PageLayout'
-import { useMovie } from '../hooks'
+import { Card } from '../components/ui'
+import { useMovie, useAuth } from '../hooks'
 
 
 export const FavoritesPage = () => {
-    const { data, isLoading, favoriteMovies, getFavorites } = useMovie()
+    const { data, isLoading, getFavoriteMovies } = useMovie()
+    const { user, getUser } = useAuth()
 
     useEffect(() => {
-        console.log(favoriteMovies)
-        // llamar a getFavorites para establecer los resultados en data
-        getFavorites()
+        if(!user.id){
+            const userInfo = getUser()
+            getFavoriteMovies(userInfo)
+        }
     }, [])
 
     return (
         <PageLayout>
-            {/* <section className='grid-section'>
+            <section className='grid-section'>
                 {
-                    data &&
-                    data.map(movie => (
-                        <Card key={movie.id} movie={movie} />
-                    ))
+                    isLoading
+                        ? <p>cargando...</p>
+                        : (
+                            data &&
+                            data.map(movie => (
+                                <Card key={movie.id} movie={movie} favorite={true} />
+                            ))
+                        )
                 }
-            </section> */}
+            </section>
         </PageLayout>
     )
 }

@@ -1,0 +1,105 @@
+.nav-container {
+    width: 100%;
+    height: 50px;
+    background-color: $black;
+    color: $white;
+    font-family: $primary_font;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-open {
+      width: 60vw;
+      // padding: 1rem;
+    }
+}
+
+.nav-logo {
+    font-weight: bold;
+}
+
+.nav-links {
+    height: 100vh;
+    width: 0vw;
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    gap: 2rem;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    list-style: none;
+    transition: width 0.3s ease-in;
+
+    li {
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+
+    @include tablet {
+      & {
+        height: inherit;
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        position: static;
+        padding: 0;
+
+        li {
+          padding: 0;
+          width: max-content;
+        }
+      }
+    }
+}
+
+.nav-logout-btn {
+  border: 1px solid $beige;
+  background-color: inherit;
+  padding: 0.3rem 0.6rem;
+  color: $beige;
+  cursor: pointer;
+}
+
+.burguer {
+    width: 35px;
+    height: 25px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .burguer-bar {
+      width: 100%;
+      background-color: antiquewhite;
+      height: 3px;
+      transition: all 250ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      
+    }
+
+    @include tablet {
+      & {
+        display: none;
+      }
+    }
+}
+
+.burguer-open {
+  .burguer-bar:first-child {
+    transform: translateX(5px) rotate(20deg);
+  }
+ }

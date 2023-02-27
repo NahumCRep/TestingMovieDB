@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import { AuthProvider } from './context/AuthProvider';
 import reportWebVitals from './reportWebVitals';
-import { MoviesProvider } from './context/MoviesProvider';
+import './styles/styles.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MoviesProvider>
+    <AuthProvider>
       <App />
-    </MoviesProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 

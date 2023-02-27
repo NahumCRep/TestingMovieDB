@@ -1,0 +1,27 @@
+.searchbar-form {
+    width: 100%;
+    display: flex;
+    height: 30px;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    input {
+        background-color: $beige;
+        width: 100%;
+        height: inherit;
+        padding: 0 2.5rem 0 .5rem;
+    }
+
+    button[type='submit'] {
+        background-color: $black;
+        color: $white;
+        padding: 0 0.5rem;
+        height: inherit;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

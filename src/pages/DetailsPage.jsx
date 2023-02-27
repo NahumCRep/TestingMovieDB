@@ -1,28 +1,29 @@
 import React, { useEffect } from 'react'
-import '../styles/pages/detailspage.css'
 import { PageLayout } from '../components/layouts/PageLayout'
-import { useParams } from 'react-router-dom'
-import { useMovie } from '../hooks'
-import { posterURL500 } from '../api/config'
+import { useParams, useLocation } from 'react-router-dom'
+import { useMovie, useAuth } from '../hooks'
+import { posterURL500, backdropURL } from '../api/config'
 
 export const DetailsPage = () => {
   const params = useParams()
+  const location = useLocation()
+  const { user } = useAuth()
   const { 
     data,
-    favoriteMovies,  
     getMovie, 
-    isLoading, 
-    addMovieToFavorites, 
-    deleteMovieToFavorites
+    isLoading,
+    markMovieAsFavorite
   } = useMovie()
 
+  const queryParams = new URLSearchParams(location.search)
+  const favoriteMarked = queryParams.get('fav')
+
   const handleFavMovie = () => {
-    // falto corregir el funcionamiento de deleteMovie..
-    if(favoriteMovies.includes(data.id)){
-      deleteMovieToFavorites(data.id)
-    }else{
-      addMovieToFavorites(data.id)
-    }
+    markMovieAsFavorite({
+      type:'movie',
+      id: data.id,
+      fav: favoriteMarked ? false : true
+    }, user)
   }
 
   useEffect(() => {
@@ -38,17 +39,23 @@ export const DetailsPage = () => {
             : (
               <>
                 <figure className='movie-img'>
-                  <img src={`${posterURL500}/${data.poster_path}`} alt={data.original_title} />
+                  <img src={`${backdropURL}/${data.backdrop_path}`} alt={data.original_title} />
                 </figure>
                 <div className='movie-info'>
 
                   <h1>{data.original_title}</h1>
-                  
-                  <p>Año {new Date(data.release_date).getFullYear()}</p>
+                  <div className='movie-info-flex'>
+                    <p><b>Año:</b> {new Date(data.release_date).getFullYear()}</p>
+                    <p>
+                      <b>Duracion:</b>
+                      {` ${Math.trunc(data.runtime / 60)}h ${ data.runtime - (60 * (Math.trunc(data.runtime / 60)))} min`}
+                    </p> 
+                  </div>
+
                   
                   <div className='movie-genres'>
                     {
-                      data.genres.map(genre => <span>{genre.name}</span>)
+                      data.genres.map(genre => <span key={genre.id}>{genre.name}</span>)
                     }
                   </div>
                   
@@ -56,9 +63,9 @@ export const DetailsPage = () => {
 
                   <button onClick={handleFavMovie} className="btn-favorite">
                     {
-                      favoriteMovies.includes(data.id) 
-                      ? 'Eliminar de Favoritos'
-                      : 'Agregar a Favoritos'
+                      favoriteMarked
+                      ? 'quitar de favoritos'
+                      : 'agregar a favoritos'                  
                     }
                   </button>
                 </div>

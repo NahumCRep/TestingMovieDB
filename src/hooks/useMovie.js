@@ -27,7 +27,7 @@ export const useMovie = () => {
 
         try {
             let queryUrl = ''
-            let queryParams = { api_key, page}
+            let queryParams = { api_key, page }
 
             if(searchValue){
                 queryUrl = apiRoutes.search
@@ -89,14 +89,60 @@ export const useMovie = () => {
         }
     }
 
+    const markMovieAsFavorite = async (movie, user) => {
+        try {
+            const resp = await MovieApi.post(`/account/${user.id}/favorite`, 
+                        {
+                            media_type: movie.type, 
+                            media_id:   movie.id, 
+                            favorite:   movie.fav
+                        },
+                        {params:{
+                            api_key, 
+                            session_id: user.session_id
+                        }},
+                    )
+        } catch (error) {
+            console.log('MMAF-E', error)
+        }
+    }
+
+    const getFavoriteMovies = async (user) => {
+        setMovieData({
+            ...movieData,
+            isLoading:true
+        })
+
+        try {
+            const { data } = await MovieApi.get(`/account/${user.id}/favorite/movies`, 
+            {params:{api_key, session_id: user.session_id}})
+
+            setMovieData({
+                data: data.results,
+                isLoading: false,
+                hasError: null
+            })
+
+        } catch (error) {
+            console.log('GFM-E', error)
+            setMovieData({
+                data:null,
+                isLoading:false,
+                hasError: 'Error al obtener lista de favoritos'
+            })
+        }
+    }
+
    
 
     return {
         ...movieData,
         ...pagination,
         categories,
-        getMovies,
         getMovie,
+        getMovies,
         getCategories,
+        getFavoriteMovies,
+        markMovieAsFavorite
     }
 }

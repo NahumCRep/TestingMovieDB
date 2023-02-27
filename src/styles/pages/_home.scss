@@ -1,0 +1,53 @@
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 20px;
+
+    @include desktop {
+        & {
+            flex-direction: row-reverse;
+        }
+
+        .home-body {
+            width: 70%;
+        }
+    }
+}
+
+.home-categories-section {
+    padding: 1rem 0rem;
+
+    @include desktop {
+        & {
+            width: 25%;
+        }
+    }
+}
+
+.grid-section {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    gap: 1rem;
+    row-gap: 2rem;
+
+    @include tablet {
+        & {
+            grid-template-columns: repeat(3, minmax(100px, 1fr));
+        }
+    }
+    
+    @include desktop {
+        & {
+            grid-template-columns: repeat(4, minmax(150px, 1fr));
+        }
+    }
+
+    @include largedesktop {
+        & {
+            grid-template-columns: repeat(5, minmax(150px, 1fr));
+        }
+    }
+}

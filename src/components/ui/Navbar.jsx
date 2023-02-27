@@ -1,19 +1,19 @@
 import React,  {useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import '../../styles/components/navbar.css'
+import { useAuth } from '../../hooks'
 
 export const Navbar = () => {
-  const [search, setSearch] = useState('')
   const [isNavOpen, setIsNavOpen] = useState(false)
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate(`/search/${search}`)
-  }
 
   const handleMenu = () => {
     setIsNavOpen(!isNavOpen)
+  }
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
   }
 
   return (
@@ -22,24 +22,32 @@ export const Navbar = () => {
           MovieApp
         </NavLink>
         <ul className={`nav-links ${isNavOpen ? 'nav-open':''}`}>
-          <form method='GET' onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              value={search} 
-              placeholder='buscar...'
-              onChange={e => setSearch(e.target.value)} 
-            />
-            <button type='submit'>buscar</button>
-          </form>
-          <NavLink to={'/favorites'}>
-            Mis Favoritos
-          </NavLink>
+          {
+            user.status === 'authenticated'
+            ? (
+              <>
+              <li>
+                <NavLink to={'/favorites'}>
+                  Mis Favoritos
+                </NavLink>
+              </li>
+              <li>
+                <button className='nav-logout-btn' onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+              </>
+            )
+            : <NavLink to={'login'} >Login</NavLink>
+          }
         </ul>
 
         <button 
           onClick={handleMenu} 
-          className='burguer'>
-            M
+          className={`burguer ${isNavOpen ? 'burguer-open':''}`}>
+            <div className='burguer-bar'></div>
+            <div className='burguer-bar'></div>
+            <div className='burguer-bar'></div>
         </button>
     </div>
   )
