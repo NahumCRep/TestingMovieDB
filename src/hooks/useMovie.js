@@ -9,10 +9,10 @@ export const useMovie = () => {
         hasError: null
     })
     const [categories, setCategories] = useState()
-    const [pagination, setPagination] = useState({
-        page: 1,
-        totalPages: 1
-    })
+    // const [pagination, setPagination] = useState({
+    //     page: 1,
+    //     totalPages: 1
+    // })
 
     const getMovies = async ({page = 1, searchValue = '', category = ''}) => {
         const apiRoutes = {
@@ -39,13 +39,21 @@ export const useMovie = () => {
 
             const movies = await MovieApi.get(queryUrl, {params: queryParams})
        
-            setPagination({
+            // setPagination({
+            //     page: movies.data.page,
+            //     totalPages: movies.data.total_pages
+            // })
+
+            const pagination = {
                 page: movies.data.page,
                 totalPages: movies.data.total_pages
-            })
+            }
+
+            console.log(pagination)
 
             setMovieData({
                 data: movies.data.results,
+                pagination: pagination,
                 isLoading: false,
                 hasError: null
             })
@@ -137,7 +145,6 @@ export const useMovie = () => {
 
     return {
         ...movieData,
-        ...pagination,
         categories,
         getMovie,
         getMovies,

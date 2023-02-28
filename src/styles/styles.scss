@@ -1,24 +1,14 @@
+@use './base' as *;
+@use './pages';
+@use './components';
+@use './layouts';
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-// UI Settins
-@import './base/colors';
-@import './base/media-querys';
-@import './base/fonts';
-
-// Components
-@import './components/card';
-@import './components/navbar';
-@import './components//searchbar';
-@import './components/category-section';
-
-// Layouts
-@import './layouts/page-layout';
-
-// Pages
-@import './pages/home';
-@import './pages/approved';
-@import './pages/details';
+body {
+  background-color: $dark;
+}

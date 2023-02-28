@@ -1,3 +1,5 @@
+@use '../base' as *;
+
 .searchbar-form {
     width: 100%;
     display: flex;
@@ -8,15 +10,15 @@
     position: relative;
 
     input {
-        background-color: $beige;
+        background-color: $white;
         width: 100%;
         height: inherit;
         padding: 0 2.5rem 0 .5rem;
     }
 
     button[type='submit'] {
-        background-color: $black;
-        color: $white;
+        background-color: $beige;
+        color: $black;
         padding: 0 0.5rem;
         height: inherit;
         cursor: pointer;

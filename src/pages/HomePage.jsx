@@ -6,7 +6,7 @@ import { Pagination, Card } from '../components/ui'
 import { CategorySection } from '../components/sections'
 
 export const HomePage = () => {
-    const { data, getMovies } = useMovie()
+    const { data, pagination, getMovies } = useMovie()
     const { category, search } = useParams()
     const location = useLocation()
 
@@ -24,9 +24,6 @@ export const HomePage = () => {
                     <CategorySection />
                 </div>
                 <div className='home-body'>
-                    <div className='home-header'>
-                        <h1>Peliculas</h1>
-                    </div>
                     <section className='grid-section'>
                         {
                             data &&
@@ -35,7 +32,7 @@ export const HomePage = () => {
                             ))
                         }
                     </section>
-                    <Pagination currentPage={page || 1} />
+                    <Pagination pages={pagination ? pagination : {page:1, totalPages:1}} />
                 </div>
             </div>
         </PageLayout>
